@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mapa Arquetípico — Despertar da Consciência</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <style>
 :root {
   --bg-deep: #0b0a10;
@@ -62,14 +63,8 @@ body {
 /* ═══════════════ SECTIONS ═══════════════ */
 .section {
   display: none;
-  animation: fadeIn 0.8s ease;
 }
 .section.active { display: block; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 
 /* ═══════════════ HEADER / BRAND ═══════════════ */
 .brand-header {
@@ -283,7 +278,6 @@ body {
 /* ═══════════════ QUESTIONS ═══════════════ */
 .question-block {
   display: none;
-  animation: fadeIn 0.6s ease;
 }
 .question-block.active { display: block; }
 
@@ -702,15 +696,29 @@ body {
 
 /* ═══════════════ RESPONSIVE ═══════════════ */
 @media (max-width: 640px) {
-  .brand-title { font-size: 2rem; }
-  .brand-subtitle { font-size: 0.7rem; }
-  .intro-text { font-size: 1.05rem; }
-  .question-text { font-size: 1.15rem; }
-  .card-header { padding: 20px; }
-  .card-body { padding: 20px; }
-  .card-title { font-size: 1.3rem; }
-  .results-title { font-size: 1.7rem; }
-  .config-bar { flex-wrap: wrap; gap: 6px; padding: 10px; }
+  .brand-header { padding: 40px 15px 20px; }
+  .brand-title { font-size: 2.2rem; }
+  .brand-subtitle { font-size: 0.7rem; letter-spacing: 0.15em; }
+  .intro-text { font-size: 1.05rem; margin-bottom: 30px; }
+  .form-group { margin-bottom: 20px; }
+  .btn-primary { padding: 18px 24px; font-size: 0.9rem; }
+  
+  .question-text { font-size: 1.25rem; margin-bottom: 25px; line-height: 1.6; }
+  .likert-option { padding: 16px; margin-bottom: 8px; }
+  .likert-radio { width: 24px; height: 24px; margin-right: 14px; }
+  .likert-option.selected .likert-radio::after { width: 12px; height: 12px; }
+  
+  .progress-container { margin-bottom: 30px; }
+  .question-nav { flex-direction: column-reverse; gap: 12px; }
+  .nav-btn { width: 100%; padding: 16px; font-size: 0.9rem; }
+  
+  .card-header { padding: 20px; flex-direction: column; text-align: center; }
+  .card-icon { margin-bottom: 10px; }
+  .card-body { padding: 20px 15px; }
+  .card-title { font-size: 1.5rem; }
+  .card-section-title { font-size: 0.95rem; }
+  .results-title { font-size: 1.8rem; }
+  .config-bar { flex-wrap: wrap; gap: 6px; padding: 10px; display: none; }
   .config-bar input { width: 100%; }
 }
 
@@ -856,18 +864,15 @@ body {
 
 </div> <!-- /container -->
 
-<!-- ═══════════════ CONFIG BAR ═══════════════ -->
-<div class="config-bar" id="config-bar">
-  <span class="status" id="webhook-status"></span>
-  <span>Webhook:</span>
-  <input type="text" id="webhook-url" placeholder="Cole a URL do Google Apps Script aqui" />
-  <button onclick="saveWebhook()">Salvar</button>
-</div>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
 // ██  DATA: ARCHETYPE DEFINITIONS & QUESTIONS
 // ═══════════════════════════════════════════════════════════════
+<!-- ═══════════════ CONFIG BAR ═══════════════ -->
+function getWebhookUrl() {
+  return 'https://script.google.com/macros/s/AKfycbz3_A6JdCBOJd9oXZAzI9m5fTqUdnmWIjyOJ6CTDuQ5rY2rb-Yx28_ZVQNquPEz6keC/exec';
+}
 
 const ARCHETYPES = {
   maga: {
@@ -1098,9 +1103,34 @@ function initStars() {
 // ═══════════════════════════════════════════════════════════════
 
 function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const current = document.querySelector('.section.active');
+  const next = document.getElementById(id);
+  
+  if (current && current.id !== id) {
+    gsap.to(current, { 
+      opacity: 0, 
+      y: -20, 
+      duration: 0.4, 
+      onComplete: () => {
+        current.classList.remove('active');
+        current.style.opacity = '';
+        current.style.transform = '';
+        next.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        gsap.fromTo(next, 
+          { opacity: 0, y: 30 }, 
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+        );
+      }
+    });
+  } else if (!current) {
+    next.classList.add('active');
+    gsap.fromTo(next, 
+      { opacity: 0, y: 30 }, 
+      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+    );
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1167,6 +1197,16 @@ function selectAnswer(blockIdx, questionId, value, el) {
 
   // Enable next button
   document.getElementById('btn-next').disabled = false;
+
+  // Animate selection briefly, then auto-advance
+  gsap.fromTo(el, { scale: 0.98 }, { scale: 1, duration: 0.2 });
+  
+  // Clear any existing auto-advance timeout
+  if (window._autoAdvanceTimeout) clearTimeout(window._autoAdvanceTimeout);
+  
+  window._autoAdvanceTimeout = setTimeout(() => {
+    nextQuestion();
+  }, 400); // 400ms delay to visually register tap
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1189,8 +1229,9 @@ function updateProgress() {
 }
 
 function nextQuestion() {
-  const qBlock = document.querySelectorAll('.question-block')[currentQuestion];
-  const qId = parseInt(qBlock.dataset.questionId);
+  const blocks = document.querySelectorAll('.question-block');
+  const currentBlock = blocks[currentQuestion];
+  const qId = parseInt(currentBlock.dataset.questionId);
   if (!(qId in answers)) return;
 
   if (currentQuestion === 35) {
@@ -1199,19 +1240,57 @@ function nextQuestion() {
     return;
   }
 
-  document.querySelectorAll('.question-block')[currentQuestion].classList.remove('active');
-  currentQuestion++;
-  document.querySelectorAll('.question-block')[currentQuestion].classList.add('active');
-  updateProgress();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const nextBlock = blocks[currentQuestion + 1];
+
+  gsap.to(currentBlock, {
+    opacity: 0,
+    x: -30,
+    duration: 0.3,
+    onComplete: () => {
+      currentBlock.classList.remove('active');
+      currentBlock.style.opacity = '';
+      currentBlock.style.transform = '';
+      
+      currentQuestion++;
+      nextBlock.classList.add('active');
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      gsap.fromTo(nextBlock, 
+        { opacity: 0, x: 30 }, 
+        { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }
+      );
+    }
+  });
 }
 
 function prevQuestion() {
   if (currentQuestion === 0) return;
-  document.querySelectorAll('.question-block')[currentQuestion].classList.remove('active');
-  currentQuestion--;
-  document.querySelectorAll('.question-block')[currentQuestion].classList.add('active');
-  updateProgress();
+  
+  const blocks = document.querySelectorAll('.question-block');
+  const currentBlock = blocks[currentQuestion];
+  const prevBlock = blocks[currentQuestion - 1];
+
+  gsap.to(currentBlock, {
+    opacity: 0,
+    x: 30,
+    duration: 0.3,
+    onComplete: () => {
+      currentBlock.classList.remove('active');
+      currentBlock.style.opacity = '';
+      currentBlock.style.transform = '';
+      
+      currentQuestion--;
+      prevBlock.classList.add('active');
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      gsap.fromTo(prevBlock, 
+        { opacity: 0, x: -30 }, 
+        { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }
+      );
+    }
+  });
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1288,7 +1367,6 @@ function renderResults(top3, allScores) {
 
     const card = document.createElement('div');
     card.className = 'archetype-rank';
-    card.style.animationDelay = (idx * 0.2) + 's';
 
     card.innerHTML = `
       <div class="rank-label">${rankLabels[idx]}</div>
@@ -1322,12 +1400,20 @@ function renderResults(top3, allScores) {
     cardsContainer.appendChild(card);
   });
 
+  // Reveal Cards with GSAP Stagger
+  gsap.fromTo(".archetype-rank", 
+    { opacity: 0, y: 40 },
+    { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power2.out", delay: 0.2 }
+  );
+
   // Animate score bars
-  setTimeout(() => {
-    document.querySelectorAll('.card-score-fill').forEach(bar => {
-      bar.style.width = bar.dataset.target + '%';
-    });
-  }, 500);
+  gsap.to(".card-score-fill", {
+    width: function(i, el) { return el.dataset.target + "%"; },
+    duration: 1.5,
+    ease: "power3.out",
+    delay: 0.6,
+    stagger: 0.2
+  });
 
   // Integration note
   const note = document.getElementById('integration-note');
@@ -1444,6 +1530,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initStars();
   initWebhookUI();
   initWhatsAppMask();
+
+  // Initial Entry Animation
+  gsap.fromTo(".brand-symbol", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: "back.out(1.5)" });
+  gsap.fromTo(".brand-title", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.3 });
+  gsap.fromTo(".brand-subtitle", { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 0.5 });
+  gsap.fromTo(".intro-text", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.6 });
+  gsap.fromTo(".form-group, .btn-primary", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.8 });
 });
 </script>
 
