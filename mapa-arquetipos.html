@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Arquetípico — Despertar da Consciência</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0b0a10;
+  --bg-card: #13111a;
+  --bg-card-hover: #1a1725;
+  --gold: #c9a96e;
+  --gold-light: #e4d4a5;
+  --gold-dim: #8a7344;
+  --purple-deep: #2d1b3d;
+  --purple-mid: #4a2d6b;
+  --purple-soft: #6b4d8a;
+  --cream: #f0e8d8;
+  --cream-dim: #b8a88a;
+  --rose: #c27a7a;
+  --rose-soft: #d4a0a0;
+  --text-main: #e8e0d0;
+  --text-dim: #9a8e7a;
+  --text-bright: #fff8ee;
+  --shadow-glow: rgba(201, 169, 110, 0.15);
+  --transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ═══════════════ BACKGROUND STARS ═══════════════ */
+#stars-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ═══════════════ MAIN CONTAINER ═══════════════ */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ═══════════════ SECTIONS ═══════════════ */
+.section {
+  display: none;
+  animation: fadeIn 0.8s ease;
+}
+.section.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════ HEADER / BRAND ═══════════════ */
+.brand-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
+
+.brand-symbol {
+  width: 90px; height: 90px;
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.brand-symbol svg { width: 100%; height: 100%; }
+
+.brand-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.brand-subtitle {
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  font-weight: 400;
+}
+
+/* ═══════════════ INTRO SECTION ═══════════════ */
+.intro-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: var(--cream);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.intro-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 30px auto;
+}
+
+.intro-details {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.intro-details p {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.intro-details strong {
+  color: var(--gold-light);
+  font-weight: 500;
+}
+
+/* ═══════════════ FORMS ═══════════════ */
+.form-group {
+  margin-bottom: 28px;
+}
+
+.form-label {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  color: var(--gold-light);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-input:focus, .form-select:focus {
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 20px var(--shadow-glow);
+}
+
+.form-input::placeholder {
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+.form-select option {
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+/* ═══════════════ BUTTONS ═══════════════ */
+.btn-primary {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  margin: 40px auto 0;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  color: var(--bg-deep);
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201, 169, 110, 0.3);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 12px 28px;
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  border-radius: 50px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 8px;
+}
+
+.btn-secondary:hover {
+  background: rgba(201, 169, 110, 0.1);
+  border-color: var(--gold);
+}
+
+/* ═══════════════ PROGRESS BAR ═══════════════ */
+.progress-container {
+  margin: 0 auto 40px;
+  max-width: 500px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.progress-label {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.progress-count {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--gold);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(201, 169, 110, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+  border-radius: 3px;
+  transition: width 0.6s ease;
+  width: 0%;
+}
+
+/* ═══════════════ QUESTIONS ═══════════════ */
+.question-block {
+  display: none;
+  animation: fadeIn 0.6s ease;
+}
+.question-block.active { display: block; }
+
+.question-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  color: var(--gold-dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.question-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  line-height: 1.7;
+  color: var(--cream);
+  margin-bottom: 35px;
+  font-weight: 400;
+}
+
+.likert-scale {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.likert-option {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 169, 110, 0.08);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.likert-option:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(201, 169, 110, 0.2);
+}
+
+.likert-option.selected {
+  background: rgba(201, 169, 110, 0.08);
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 15px var(--shadow-glow);
+}
+
+.likert-radio {
+  width: 20px; height: 20px;
+  border: 2px solid var(--gold-dim);
+  border-radius: 50%;
+  margin-right: 16px;
+  flex-shrink: 0;
+  position: relative;
+  transition: var(--transition);
+}
+
+.likert-option.selected .likert-radio {
+  border-color: var(--gold);
+}
+
+.likert-option.selected .likert-radio::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.likert-label {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  font-weight: 300;
+}
+
+.likert-option.selected .likert-label {
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.question-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  gap: 16px;
+}
+
+.nav-btn {
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.nav-btn-back {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+}
+
+.nav-btn-back:hover {
+  color: var(--gold);
+  border-color: var(--gold-dim);
+}
+
+.nav-btn-next {
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  color: var(--bg-deep);
+  font-weight: 600;
+}
+
+.nav-btn-next:hover {
+  box-shadow: 0 4px 20px rgba(201, 169, 110, 0.3);
+  transform: translateY(-1px);
+}
+
+.nav-btn-next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ═══════════════ LOADING ═══════════════ */
+#loading-section {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.loading-symbol {
+  width: 100px; height: 100px;
+  margin: 0 auto 40px;
+  position: relative;
+}
+
+.loading-ring {
+  position: absolute;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+
+.loading-ring:nth-child(1) {
+  width: 100%; height: 100%;
+  border-top-color: var(--gold);
+  animation: spin 2s linear infinite;
+}
+
+.loading-ring:nth-child(2) {
+  width: 75%; height: 75%;
+  top: 12.5%; left: 12.5%;
+  border-right-color: var(--purple-soft);
+  animation: spin 2.5s linear infinite reverse;
+}
+
+.loading-ring:nth-child(3) {
+  width: 50%; height: 50%;
+  top: 25%; left: 25%;
+  border-bottom-color: var(--rose-soft);
+  animation: spin 1.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: var(--gold-light);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.loading-sub {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════════ RESULTS ═══════════════ */
+.results-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.results-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.results-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: var(--cream);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.results-intro {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* Archetype Cards */
+.archetype-rank {
+  margin-bottom: 50px;
+}
+
+.rank-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 16px;
+  padding-left: 4px;
+}
+
+.archetype-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 169, 110, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.archetype-card:hover {
+  border-color: rgba(201, 169, 110, 0.25);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+  padding: 30px 30px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.06);
+}
+
+.card-icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: rgba(201, 169, 110, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.card-title-group {
+  flex: 1;
+}
+
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.card-essence {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.card-score-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(201, 169, 110, 0.06);
+}
+
+.card-score-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+  transition: width 1.5s ease;
+}
+
+.card-body {
+  padding: 25px 30px 30px;
+}
+
+.card-section {
+  margin-bottom: 24px;
+}
+
+.card-section:last-child { margin-bottom: 0; }
+
+.card-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-section-title .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-light { background: var(--gold); }
+.dot-shadow { background: var(--purple-soft); }
+.dot-spirit { background: var(--rose-soft); }
+
+.card-section-text {
+  font-size: 0.88rem;
+  color: var(--cream-dim);
+  line-height: 1.8;
+  padding-left: 14px;
+}
+
+/* Integration Message */
+.integration-note {
+  text-align: center;
+  padding: 30px;
+  background: rgba(201, 169, 110, 0.04);
+  border: 1px solid rgba(201, 169, 110, 0.08);
+  border-radius: 12px;
+  margin-top: 40px;
+}
+
+.integration-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.integration-text {
+  font-size: 0.88rem;
+  color: var(--cream-dim);
+  line-height: 1.8;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* Footer */
+.results-footer {
+  text-align: center;
+  margin-top: 50px;
+  padding: 30px 0;
+}
+
+.results-footer .btn-secondary { margin-top: 10px; }
+
+/* ═══════════════ WEBHOOK CONFIG MODAL ═══════════════ */
+.config-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--bg-card);
+  border-top: 1px solid rgba(201, 169, 110, 0.1);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.config-bar input {
+  background: var(--bg-deep);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  width: 320px;
+  font-family: monospace;
+}
+
+.config-bar button {
+  background: var(--gold-dim);
+  color: var(--bg-deep);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.config-bar .status {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #c0392b;
+}
+
+.config-bar .status.connected { background: #27ae60; }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 640px) {
+  .brand-title { font-size: 2rem; }
+  .brand-subtitle { font-size: 0.7rem; }
+  .intro-text { font-size: 1.05rem; }
+  .question-text { font-size: 1.15rem; }
+  .card-header { padding: 20px; }
+  .card-body { padding: 20px; }
+  .card-title { font-size: 1.3rem; }
+  .results-title { font-size: 1.7rem; }
+  .config-bar { flex-wrap: wrap; gap: 6px; padding: 10px; }
+  .config-bar input { width: 100%; }
+}
+
+/* ═══════════════ PRINT STYLES ═══════════════ */
+@media print {
+  body { background: #fff; color: #222; }
+  .config-bar, #stars-canvas, .results-footer, .nav-btn { display: none !important; }
+  .archetype-card { break-inside: avoid; border: 1px solid #ddd; }
+  .card-title, .results-title, .rank-label { color: #333; }
+  .card-section-text { color: #555; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<div class="container">
+
+<!-- ═══════════════ SECTION 1: INTAKE ═══════════════ -->
+<div id="intake-section" class="section active">
+  <div class="brand-header">
+    <div class="brand-symbol">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/>
+        <circle cx="50" cy="50" r="32" fill="none" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+        <path d="M50 8 L50 92 M8 50 L92 50" stroke="#c9a96e" stroke-width="0.4" opacity="0.2"/>
+        <path d="M50 18 Q68 35 68 50 Q68 65 50 82 Q32 65 32 50 Q32 35 50 18Z" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.6"/>
+        <circle cx="50" cy="50" r="4" fill="#c9a96e" opacity="0.7"/>
+        <circle cx="50" cy="25" r="2" fill="#c9a96e" opacity="0.4"/>
+        <circle cx="50" cy="75" r="2" fill="#c9a96e" opacity="0.4"/>
+        <circle cx="30" cy="50" r="1.5" fill="#c9a96e" opacity="0.3"/>
+        <circle cx="70" cy="50" r="1.5" fill="#c9a96e" opacity="0.3"/>
+      </svg>
+    </div>
+    <h1 class="brand-title">Mapa Arquetípico</h1>
+    <p class="brand-subtitle">Despertar da Consciência Feminina</p>
+  </div>
+
+  <p class="intro-text">
+    Toda mulher carrega dentro de si forças ancestrais que moldam a maneira como ela ama, luta, cria e se cura.
+    Este mapa é um espelho — ele revela as energias arquetípicas que guiam seu caminhar,
+    iluminando tanto sua luz quanto as sombras que pedem integração.
+  </p>
+
+  <div class="intro-divider"></div>
+
+  <div class="intro-details">
+    <p><strong>36 reflexões</strong> · aproximadamente 12 minutos</p>
+    <p>Responda com honestidade e sem pressa. Não há respostas certas.</p>
+  </div>
+
+  <form id="intake-form" onsubmit="return false;">
+    <div class="form-group">
+      <label class="form-label">Como você gostaria de ser chamada?</label>
+      <input type="text" class="form-input" id="inp-name" placeholder="Seu nome" required>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Seu WhatsApp (com DDD)</label>
+      <input type="tel" class="form-input" id="inp-whatsapp" placeholder="(00) 00000-0000" required>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Qual é a sua idade?</label>
+      <input type="number" class="form-input" id="inp-age" placeholder="Sua idade" min="16" max="99" required>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Como você me encontrou?</label>
+      <select class="form-select" id="inp-source" required>
+        <option value="" disabled selected>Selecione uma opção</option>
+        <option value="Instagram">Instagram</option>
+        <option value="Facebook">Facebook</option>
+        <option value="YouTube">YouTube</option>
+        <option value="TikTok">TikTok</option>
+        <option value="Google">Google</option>
+        <option value="Indicação de amiga">Indicação de amiga</option>
+        <option value="Grupo de WhatsApp">Grupo de WhatsApp</option>
+        <option value="Terapeuta/Profissional">Terapeuta/Profissional</option>
+        <option value="Outro">Outro</option>
+      </select>
+    </div>
+    <button type="button" class="btn-primary" onclick="startQuiz()">
+      Iniciar Minha Jornada
+    </button>
+  </form>
+</div>
+
+<!-- ═══════════════ SECTION 2: QUIZ ═══════════════ -->
+<div id="quiz-section" class="section">
+  <div class="progress-container">
+    <div class="progress-info">
+      <span class="progress-label">Sua jornada</span>
+      <span class="progress-count" id="progress-count">1 de 36</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <div id="questions-container"></div>
+
+  <div class="question-nav">
+    <button class="nav-btn nav-btn-back" id="btn-back" onclick="prevQuestion()">← Voltar</button>
+    <button class="nav-btn nav-btn-next" id="btn-next" onclick="nextQuestion()" disabled>Próxima →</button>
+  </div>
+</div>
+
+<!-- ═══════════════ SECTION 3: LOADING ═══════════════ -->
+<div id="loading-section" class="section">
+  <div class="loading-symbol">
+    <div class="loading-ring"></div>
+    <div class="loading-ring"></div>
+    <div class="loading-ring"></div>
+  </div>
+  <p class="loading-text">Decifrando seus arquétipos…</p>
+  <p class="loading-sub" id="loading-msg">Analisando padrões emocionais</p>
+</div>
+
+<!-- ═══════════════ SECTION 4: RESULTS ═══════════════ -->
+<div id="results-section" class="section">
+  <div class="results-header">
+    <h2 class="results-title">Seu Mapa Arquetípico</h2>
+    <p class="results-name" id="results-name"></p>
+    <div class="intro-divider"></div>
+    <p class="results-intro">
+      Os três arquétipos abaixo representam as forças mais ativas na sua psique neste momento.
+      Eles revelam seus dons naturais, seus padrões inconscientes e o caminho de integração
+      que sua alma está percorrendo.
+    </p>
+  </div>
+
+  <div id="results-cards"></div>
+
+  <div class="integration-note" id="integration-note"></div>
+
+  <div class="results-footer">
+    <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 16px;">
+      Este mapa é um retrato do momento presente. Seus arquétipos evoluem com você.
+    </p>
+    <button class="btn-secondary" onclick="window.print()">Imprimir Resultado</button>
+    <button class="btn-secondary" onclick="shareWhatsApp()">Compartilhar</button>
+  </div>
+</div>
+
+</div> <!-- /container -->
+
+<!-- ═══════════════ CONFIG BAR ═══════════════ -->
+<div class="config-bar" id="config-bar">
+  <span class="status" id="webhook-status"></span>
+  <span>Webhook:</span>
+  <input type="text" id="webhook-url" placeholder="Cole a URL do Google Apps Script aqui" />
+  <button onclick="saveWebhook()">Salvar</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// ██  DATA: ARCHETYPE DEFINITIONS & QUESTIONS
+// ═══════════════════════════════════════════════════════════════
+
+const ARCHETYPES = {
+  maga: {
+    name: "A Maga",
+    icon: "🌙",
+    essence: "Transformação · Alquimia · Intuição",
+    light: "Você possui o dom raro de transmutar realidades. Onde outros veem caos, você enxerga possibilidades. Sua intuição é uma bússola precisa — quando você a escuta, consegue catalisar transformações profundas em si mesma e nos outros. Sua presença altera a energia dos espaços. Você é a mulher que, ao tocar uma situação, a transforma por dentro.",
+    shadow: "Na sombra, a Maga pode se tornar manipuladora — usando sua percepção aguçada para controlar em vez de libertar. Pode também se desconectar da realidade, vivendo num mundo de possibilidades sem nunca concretizar nada. O medo de perder o controle pode transformá-la em alguém que orquestra tudo nos bastidores, sem se expor verdadeiramente.",
+    spiritual: "No despertar, a Maga é chamada a usar seus dons a serviço do todo, não do ego. Sua jornada espiritual envolve aprender que a verdadeira magia nasce da entrega, não do controle. Quando a Maga desperta, ela se torna canal — e não dona — da transformação."
+  },
+  curadora: {
+    name: "A Curadora",
+    icon: "🌿",
+    essence: "Cura · Empatia · Restauração",
+    light: "Você é um bálsamo no mundo. Sua presença acalma, restaura e acolhe. Pessoas naturalmente se abrem com você porque sentem em sua energia um espaço seguro. Seu dom está em perceber a dor alheia — às vezes antes que a própria pessoa perceba. Você traz cura simplesmente sendo quem é.",
+    shadow: "Na sombra, a Curadora se perde na dor alheia. Absorve emoções que não são suas, adoece pelo outro, e se esquece de si mesma. Pode desenvolver um padrão de codependência, onde curar os outros se torna uma forma de evitar suas próprias feridas. O martírio se disfarça de amor.",
+    spiritual: "No despertar, a Curadora precisa aprender que não pode curar o que não curou em si mesma. Sua jornada espiritual passa por estabelecer limites sagrados e entender que cuidar de si não é egoísmo — é pré-requisito. A Curadora desperta quando transforma compaixão em compaixão consciente."
+  },
+  guerreira: {
+    name: "A Guerreira",
+    icon: "⚔️",
+    essence: "Coragem · Limites · Ação",
+    light: "Você possui uma força interior que não depende de validação externa. Quando vê injustiça, age. Quando precisa proteger o que ama, levanta-se. Sua coragem inspira outras mulheres a encontrarem a delas. Você sabe dizer não com firmeza e sim com inteireza. Sua força não vem da raiva, mas de uma clareza profunda sobre quem você é.",
+    shadow: "Na sombra, a Guerreira vive em estado de batalha permanente. Confunde força com rigidez, e coragem com incapacidade de ser vulnerável. Pode se tornar hipervigitante, agressiva ou excessivamente competitiva. Quando não há batalha externa, cria conflitos internos. A armadura que a protege também a aprisiona.",
+    spiritual: "No despertar, a Guerreira descobre que a maior batalha é interna. Sua jornada espiritual é aprender a depor as armas e encontrar força na vulnerabilidade. A Guerreira desperta quando percebe que proteger não é controlar, e que a verdadeira coragem mora em abrir o coração."
+  },
+  amante: {
+    name: "A Amante",
+    icon: "🌹",
+    essence: "Paixão · Conexão · Presença",
+    light: "Você vive com profundidade. Sente tudo intensamente — a beleza, o prazer, a dor, o sagrado no cotidiano. Sua capacidade de conexão genuína transforma relações superficiais em encontros reais. Você traz cor, calor e vida para tudo que toca. Sua presença plena é seu maior dom — quando você está ali, está inteira.",
+    shadow: "Na sombra, a Amante pode se perder nas relações, anulando-se pelo outro. A intensidade emocional vira instabilidade. Pode desenvolver dependência afetiva, ciúmes sufocantes ou uma busca incessante por validação através do desejo alheio. Confunde fusão com amor, e abandono com morte.",
+    spiritual: "No despertar, a Amante é chamada a dirigir essa paixão para dentro. Sua jornada espiritual envolve aprender a se tornar sua própria fonte de amor, descobrindo que a conexão mais sagrada começa consigo mesma. A Amante desperta quando seu amor transborda — não por carência, mas por plenitude."
+  },
+  sabia: {
+    name: "A Sábia",
+    icon: "📖",
+    essence: "Sabedoria · Reflexão · Discernimento",
+    light: "Você busca a verdade com paciência. Não se contenta com respostas fáceis — precisa compreender as raízes de tudo. Sua capacidade de observar sem reagir é rara e valiosa. Em tempos de crise, você é o farol: pensa antes de agir, reflete antes de falar. Sua sabedoria não vem de livros apenas, mas da alquimia entre conhecimento e experiência vivida.",
+    shadow: "Na sombra, a Sábia se refugia no intelecto para evitar sentir. Analisa demais, vive pouco. Pode se tornar emocionalmente distante, julgadora ou arrogante em relação a quem não \"compreende\" as coisas como ela. A paralisia por excesso de análise impede que ela viva o que tanto estuda.",
+    spiritual: "No despertar, a Sábia precisa integrar mente e coração. Sua jornada espiritual é perceber que sabedoria sem compaixão é apenas informação. A Sábia desperta quando aceita que não precisa ter todas as respostas — e que o mistério é tão sagrado quanto a compreensão."
+  },
+  inocente: {
+    name: "A Inocente",
+    icon: "🕊️",
+    essence: "Fé · Esperança · Simplicidade",
+    light: "Você carrega uma fé renovável — mesmo após quedas, consegue recomeçar com o coração aberto. Encontra beleza no simples e sagrado no cotidiano. Sua pureza de intenção inspira confiança nos outros. Você lembra ao mundo que é possível viver com leveza sem ser superficial, e que a esperança é um ato de coragem.",
+    shadow: "Na sombra, a Inocente pode se tornar ingênua a ponto de se colocar em risco. Evita conflitos a qualquer custo, nega a sombra e as complexidades da vida. Pode se infantilizar nas relações, esperando ser resgatada. A positividade tóxica mascara dores que precisam ser sentidas.",
+    spiritual: "No despertar, a Inocente é chamada a desenvolver uma fé madura — que não nega o sofrimento, mas o atravessa com confiança. Sua jornada espiritual é integrar a inocência com a sabedoria, tornando-se uma mulher que confia sem ser ingênua. A Inocente desperta quando sua fé se torna inabalável justamente por ter sido testada."
+  },
+  exploradora: {
+    name: "A Exploradora",
+    icon: "🧭",
+    essence: "Liberdade · Autenticidade · Descoberta",
+    light: "Você precisa de espaço para ser quem realmente é. Rotinas que aprisionam sufocam sua essência. Seus momentos de maior clareza vieram quando ousou sair do conhecido. Você inspira outras mulheres a questionarem se a vida que vivem é realmente a que escolheram. Sua autenticidade é revolucionária.",
+    shadow: "Na sombra, a Exploradora confunde liberdade com fuga. Não consegue criar vínculos duradouros, compromissos a assustam. Pode estar sempre buscando a próxima novidade para evitar a intimidade com o momento presente. A inquietação se torna ansiedade — nunca está onde gostaria de estar.",
+    spiritual: "No despertar, a Exploradora descobre que a viagem mais transformadora é para dentro. Sua jornada espiritual envolve encontrar liberdade na presença, não na distância. A Exploradora desperta quando percebe que pode ser livre sem fugir, e que o desconhecido mais profundo mora dentro de si."
+  },
+  governante: {
+    name: "A Governante",
+    icon: "👑",
+    essence: "Liderança · Ordem · Responsabilidade",
+    light: "Você tem uma capacidade natural de criar ordem a partir do caos. Assume responsabilidade com naturalidade e lidera com visão. Sua presença organiza espaços, equipes e situações. Você não apenas dirige — você constrói. Sua liderança não vem de imposição, mas de uma clareza de propósito que inspira outros a seguirem.",
+    shadow: "Na sombra, a Governante se torna controladora. Precisa que tudo funcione do seu jeito, tem dificuldade em delegar e confiar. Pode se tornar rígida, autoritária e incapaz de receber críticas. O peso da responsabilidade excessiva gera solidão — acredita que só ela pode fazer as coisas direito.",
+    spiritual: "No despertar, a Governante aprende que o verdadeiro poder é servir. Sua jornada espiritual passa por soltar o controle e confiar que o universo também governa. A Governante desperta quando lidera com humildade, quando sua coroa se torna símbolo de serviço, não de superioridade."
+  },
+  criadora: {
+    name: "A Criadora",
+    icon: "🎨",
+    essence: "Imaginação · Visão · Expressão",
+    light: "Você sente uma necessidade visceral de trazer à realidade o que vive dentro de si. Criar não é hobby — é respiração. Sua mente está sempre reformulando, reimaginando, gerando possibilidades. Quando cria, você acessa algo maior que você mesma. Suas criações são extensões da sua alma — únicas e insubstituíveis.",
+    shadow: "Na sombra, a Criadora sofre com perfeccionismo paralisante. Tem tantas ideias que não concretiza nenhuma. Pode se comparar constantemente com outros, nunca achando sua criação boa o suficiente. A frustração criativa se transforma em autossabotagem. Seu crítico interno é mais severo do que qualquer julgamento externo.",
+    spiritual: "No despertar, a Criadora entende que é co-criadora com o Divino. Sua jornada espiritual é soltar a necessidade de perfeição e permitir que a vida crie através dela. A Criadora desperta quando seus atos criativos se tornam oferendas, não performances — quando criar vira oração."
+  },
+  heroina: {
+    name: "A Heroína",
+    icon: "🔥",
+    essence: "Superação · Missão · Resiliência",
+    light: "Você é forjada nas dificuldades. Cada crise desperta em você uma força que surpreende até a si mesma. Seu caminho é marcado por superações que a moldaram em alguém mais forte e mais compassiva. Você inspira não pelo sucesso, mas pela autenticidade da sua jornada. Sua resiliência é seu legado.",
+    shadow: "Na sombra, a Heroína pode se viciar em crises — inconscientemente cria dramas para se sentir viva. Tem dificuldade em descansar, pois identifica seu valor com a superação. Pode desenvolver complexo de salvadora, assumindo batalhas que não são suas. O descanso parece fraqueza.",
+    spiritual: "No despertar, a Heroína aprende que nem toda luta é sua. Sua jornada espiritual passa por aceitar que também pode ser cuidada, que pedir ajuda é força, não fraqueza. A Heroína desperta quando descobre que sua maior conquista não é vencer o mundo, mas fazer as pazes consigo mesma."
+  },
+  rebelde: {
+    name: "A Rebelde",
+    icon: "⚡",
+    essence: "Libertação · Verdade · Autenticidade Radical",
+    light: "Você enxerga as correntes que outros nem percebem. Questiona o que todos aceitam, e recusa-se a viver uma vida que não é autenticamente sua. Sua rebeldia não é destrutiva — é libertadora. Você abre caminhos para que outras mulheres se permitam ser quem realmente são. Sua verdade incomoda, mas transforma.",
+    shadow: "Na sombra, a Rebelde se torna destrutiva. Destrói sem construir. Rejeita tudo — autoridade, estrutura, compromisso — por medo de ser controlada. Pode se isolar em sua rebeldia, confundindo solidão com liberdade. A raiva não processada se torna amargura. Estar contra tudo se torna sua identidade.",
+    spiritual: "No despertar, a Rebelde descobre contra o que realmente luta: seus próprios condicionamentos internos. Sua jornada espiritual é transformar rebeldia em revolução interior — questionar não apenas o mundo, mas seus próprios padrões. A Rebelde desperta quando sua energia de ruptura se torna energia de criação."
+  },
+  cuidadora: {
+    name: "A Cuidadora",
+    icon: "🤲",
+    essence: "Nutrição · Serviço · Devoção",
+    light: "Você encontra propósito genuíno em nutrir o crescimento dos outros. Seu cuidado não é superficial — é profundo, atento e constante. Você cria espaços seguros onde pessoas florescem. Sua generosidade é uma força, não uma fraqueza. Quando cuida, você honra algo sagrado dentro de si.",
+    shadow: "Na sombra, a Cuidadora se anula. Dá tanto que se esvazia. Pode usar o cuidado como forma de controle sutil — \"eu faço tudo por você, então você me deve lealdade\". O ressentimento cresce em silêncio. Não sabe receber, e confunde ser necessária com ser amada.",
+    spiritual: "No despertar, a Cuidadora precisa aprender a cuidar de si com a mesma devoção que dedica aos outros. Sua jornada espiritual é entender que receber também é um ato sagrado. A Cuidadora desperta quando seu cuidado nasce da abundância — quando ela se nutre primeiro para poder transbordar."
+  }
+};
+
+const QUESTIONS = [
+  // ── MAGA (0,1,2)
+  { id: 0, archetype: "maga", text: "Quando algo dá errado na minha vida, depois de um tempo, costumo perceber que aquela situação precisava acontecer exatamente daquela forma para me transformar." },
+  { id: 1, archetype: "maga", text: "Frequentemente percebo conexões entre eventos que, para os outros, parecem completamente desconectados — como se eu enxergasse um fio invisível ligando tudo." },
+  { id: 2, archetype: "maga", text: "Quando entro em um ambiente, sinto que minha presença altera algo na energia do espaço — mesmo que eu não faça nada de concreto." },
+
+  // ── CURADORA (3,4,5)
+  { id: 3, archetype: "curadora", text: "Pessoas que mal me conhecem costumam se abrir comigo sobre seus problemas mais profundos, como se sentissem permissão para isso." },
+  { id: 4, archetype: "curadora", text: "Sinto no meu próprio corpo — uma dor, um aperto, um cansaço — quando alguém próximo de mim está sofrendo, mesmo que essa pessoa não tenha dito nada." },
+  { id: 5, archetype: "curadora", text: "Tenho dificuldade em assistir ao sofrimento alheio sem agir: meu primeiro impulso é sempre aliviar a dor do outro, antes mesmo de cuidar da minha." },
+
+  // ── GUERREIRA (6,7,8)
+  { id: 6, archetype: "guerreira", text: "Diante de uma injustiça — mesmo que não me afete diretamente — sinto uma urgência interna que me impulsiona a agir, mesmo quando isso pode me custar algo." },
+  { id: 7, archetype: "guerreira", text: "Consigo manter minha posição com firmeza em uma conversa difícil, mesmo quando a pessoa do outro lado é alguém que amo profundamente." },
+  { id: 8, archetype: "guerreira", text: "Minha sensação de força vem de dentro — não preciso de aplausos, reconhecimento ou permissão para confiar na minha capacidade de agir." },
+
+  // ── AMANTE (9,10,11)
+  { id: 9, archetype: "amante", text: "A beleza me atravessa de uma forma quase física — uma paisagem, uma música, um gesto de ternura podem me emocionar profundamente e sem aviso." },
+  { id: 10, archetype: "amante", text: "Vivo minhas emoções com uma intensidade que às vezes assusta os outros, mas que para mim é simplesmente a forma como existo no mundo." },
+  { id: 11, archetype: "amante", text: "Nas minhas relações mais importantes, busco uma presença tão inteira e uma entrega tão genuína que conexões superficiais me esvaziam." },
+
+  // ── SÁBIA (12,13,14)
+  { id: 12, archetype: "sabia", text: "Antes de aceitar algo como verdadeiro — uma crença, uma orientação, até uma emoção — preciso entender por que aquilo faz sentido para mim." },
+  { id: 13, archetype: "sabia", text: "Em momentos de crise, meu refúgio natural é o silêncio e a reflexão, não a ação imediata — preciso de espaço mental antes de responder." },
+  { id: 14, archetype: "sabia", text: "Sinto que o que tenho de mais valioso para oferecer ao mundo é o que aprendi na travessia das minhas próprias experiências — minha sabedoria vivida." },
+
+  // ── INOCENTE (15,16,17)
+  { id: 15, archetype: "inocente", text: "Mesmo depois de ter sido profundamente decepcionada, consigo, após um tempo, renovar minha confiança na bondade das pessoas e na vida." },
+  { id: 16, archetype: "inocente", text: "Acredito — com uma certeza que não sei explicar racionalmente — que existe um plano maior para minha vida, mesmo quando nada faz sentido." },
+  { id: 17, archetype: "inocente", text: "Meus momentos de maior plenitude são simples: o sol no rosto, o silêncio da manhã, uma risada sincera — o extraordinário mora no ordinário." },
+
+  // ── EXPLORADORA (18,19,20)
+  { id: 18, archetype: "exploradora", text: "Quando passo tempo demais na mesma rotina, começo a sentir uma inquietação interna que parece me dizer que existe algo mais além do que conheço." },
+  { id: 19, archetype: "exploradora", text: "Os momentos que mais me transformaram na vida foram aqueles em que ousei ir além da minha zona de conforto — viagens, mudanças, rupturas necessárias." },
+  { id: 20, archetype: "exploradora", text: "Se tivesse que escolher entre segurança e autenticidade, escolheria ser fiel a quem sou — mesmo que isso me custasse aprovação." },
+
+  // ── GOVERNANTE (21,22,23)
+  { id: 21, archetype: "governante", text: "Em grupos, naturalmente assumo a organização e a direção das coisas — não por imposição, mas porque percebo que algo precisa de estrutura e ninguém está fazendo." },
+  { id: 22, archetype: "governante", text: "Sinto-me responsável pelo bem-estar dos espaços e das pessoas ao meu redor, como se organizar e cuidar da estrutura fosse minha vocação natural." },
+  { id: 23, archetype: "governante", text: "Transformar caos em ordem — seja em um projeto, em um ambiente ou em uma situação emocional — me dá uma sensação profunda de realização." },
+
+  // ── CRIADORA (24,25,26)
+  { id: 24, archetype: "criadora", text: "Sinto uma urgência quase física de expressar o que vive dentro de mim — se não crio, escrevo, ou manifesto de alguma forma, algo em mim sufoca." },
+  { id: 25, archetype: "criadora", text: "Quando imagino algo — uma ideia, um projeto, uma visão — sinto que preciso trazê-lo à realidade, como se fosse uma promessa que fiz a mim mesma." },
+  { id: 26, archetype: "criadora", text: "Minha mente está constantemente reformulando e reimaginando possibilidades — às vezes é difícil parar de criar mentalmente, mesmo quando quero descansar." },
+
+  // ── HEROÍNA (27,28,29)
+  { id: 27, archetype: "heroina", text: "Olhando para trás, percebo que meus maiores saltos de crescimento vieram de momentos que, na hora, pareciam insuportáveis." },
+  { id: 28, archetype: "heroina", text: "Sinto que carrego dentro de mim uma missão ou propósito que, mesmo sem conseguir definir completamente, sei que exige coragem e que eu não posso ignorar." },
+  { id: 29, archetype: "heroina", text: "A adversidade desperta em mim uma versão de mim mesma que eu não sabia que existia — como se o desafio ativasse algo adormecido." },
+
+  // ── REBELDE (30,31,32)
+  { id: 30, archetype: "rebelde", text: "Quando percebo que uma regra ou tradição existe apenas porque \"sempre foi assim\", sinto um incômodo profundo que me leva a questioná-la — mesmo que eu seja a única." },
+  { id: 31, archetype: "rebelde", text: "Existe um chamado interior que me pede para romper com padrões que limitam minha autenticidade, mesmo quando esses padrões vêm da minha própria família ou cultura." },
+  { id: 32, archetype: "rebelde", text: "Prefiro ser vista como difícil, intensa ou inconveniente do que viver uma vida que não sinto como genuinamente minha." },
+
+  // ── CUIDADORA (33,34,35)
+  { id: 33, archetype: "cuidadora", text: "Encontro um sentido profundo e uma alegria genuína em nutrir o crescimento de outra pessoa — ver alguém florescer por algo que ofereci é minha maior recompensa." },
+  { id: 34, archetype: "cuidadora", text: "Percebo que, com frequência, coloco as necessidades dos outros acima das minhas — e, na maioria das vezes, faço isso com naturalidade, quase sem pensar." },
+  { id: 35, archetype: "cuidadora", text: "Meu maior medo não é fracassar ou sofrer — é não estar presente quando alguém que amo genuinamente precisa de mim." }
+];
+
+const LIKERT_OPTIONS = [
+  { value: 1, label: "Não me identifico" },
+  { value: 2, label: "Me identifico pouco" },
+  { value: 3, label: "Me identifico parcialmente" },
+  { value: 4, label: "Me identifico bastante" },
+  { value: 5, label: "Me identifico profundamente" }
+];
+
+// ═══════════════════════════════════════════════════════════════
+// ██  STATE
+// ═══════════════════════════════════════════════════════════════
+
+let currentQuestion = 0;
+let answers = {};
+let userData = {};
+
+// ═══════════════════════════════════════════════════════════════
+// ██  STARS BACKGROUND
+// ═══════════════════════════════════════════════════════════════
+
+function initStars() {
+  const canvas = document.getElementById('stars-canvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function createStars() {
+    stars = [];
+    const count = Math.floor((canvas.width * canvas.height) / 8000);
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.3,
+        alpha: Math.random() * 0.6 + 0.1,
+        speed: Math.random() * 0.005 + 0.002,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function draw(time) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      const alpha = s.alpha + Math.sin(time * s.speed + s.phase) * 0.15;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201, 169, 110, ${Math.max(0, alpha)})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  createStars();
+  requestAnimationFrame(draw);
+  window.addEventListener('resize', () => { resize(); createStars(); });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ██  NAVIGATION
+// ═══════════════════════════════════════════════════════════════
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ██  INTAKE → QUIZ
+// ═══════════════════════════════════════════════════════════════
+
+function startQuiz() {
+  const name = document.getElementById('inp-name').value.trim();
+  const whatsapp = document.getElementById('inp-whatsapp').value.trim();
+  const age = document.getElementById('inp-age').value.trim();
+  const source = document.getElementById('inp-source').value;
+
+  if (!name || !whatsapp || !age || !source) {
+    alert('Por favor, preencha todos os campos para iniciar sua jornada.');
+    return;
+  }
+
+  userData = { name, whatsapp, age, source };
+  buildQuestions();
+  showSection('quiz-section');
+  updateProgress();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ██  BUILD QUESTIONS
+// ═══════════════════════════════════════════════════════════════
+
+function buildQuestions() {
+  const container = document.getElementById('questions-container');
+  // Shuffle questions for less predictable grouping
+  const shuffled = [...QUESTIONS].sort(() => Math.random() - 0.5);
+  // Store shuffle order
+  window._questionOrder = shuffled;
+
+  shuffled.forEach((q, idx) => {
+    const block = document.createElement('div');
+    block.className = 'question-block' + (idx === 0 ? ' active' : '');
+    block.dataset.index = idx;
+    block.dataset.questionId = q.id;
+
+    let optionsHTML = '';
+    LIKERT_OPTIONS.forEach(opt => {
+      optionsHTML += `
+        <div class="likert-option" onclick="selectAnswer(${idx}, ${q.id}, ${opt.value}, this)">
+          <div class="likert-radio"></div>
+          <span class="likert-label">${opt.label}</span>
+        </div>`;
+    });
+
+    block.innerHTML = `
+      <div class="question-number">Reflexão ${idx + 1} de 36</div>
+      <p class="question-text">"${q.text}"</p>
+      <div class="likert-scale">${optionsHTML}</div>`;
+
+    container.appendChild(block);
+  });
+}
+
+function selectAnswer(blockIdx, questionId, value, el) {
+  // Deselect siblings
+  el.parentElement.querySelectorAll('.likert-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[questionId] = value;
+
+  // Enable next button
+  document.getElementById('btn-next').disabled = false;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ██  QUESTION NAVIGATION
+// ═══════════════════════════════════════════════════════════════
+
+function updateProgress() {
+  const pct = ((currentQuestion + 1) / 36) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-count').textContent = `${currentQuestion + 1} de 36`;
+
+  document.getElementById('btn-back').style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
+
+  const qBlock = document.querySelectorAll('.question-block')[currentQuestion];
+  const qId = parseInt(qBlock.dataset.questionId);
+  document.getElementById('btn-next').disabled = !(qId in answers);
+
+  // Change button text on last question
+  document.getElementById('btn-next').textContent = currentQuestion === 35 ? 'Ver Meu Mapa →' : 'Próxima →';
+}
+
+function nextQuestion() {
+  const qBlock = document.querySelectorAll('.question-block')[currentQuestion];
+  const qId = parseInt(qBlock.dataset.questionId);
+  if (!(qId in answers)) return;
+
+  if (currentQuestion === 35) {
+    // All answered → process
+    processResults();
+    return;
+  }
+
+  document.querySelectorAll('.question-block')[currentQuestion].classList.remove('active');
+  currentQuestion++;
+  document.querySelectorAll('.question-block')[currentQuestion].classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevQuestion() {
+  if (currentQuestion === 0) return;
+  document.querySelectorAll('.question-block')[currentQuestion].classList.remove('active');
+  currentQuestion--;
+  document.querySelectorAll('.question-block')[currentQuestion].classList.add('active');
+  updateProgress();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ██  SCORING & RESULTS
+// ═══════════════════════════════════════════════════════════════
+
+function processResults() {
+  showSection('loading-section');
+
+  const msgs = [
+    "Analisando padrões emocionais",
+    "Identificando forças arquetípicas",
+    "Mapeando luz e sombra",
+    "Integrando as camadas da sua psique",
+    "Compondo seu mapa pessoal"
+  ];
+
+  let msgIdx = 0;
+  const msgInterval = setInterval(() => {
+    msgIdx++;
+    if (msgIdx < msgs.length) {
+      document.getElementById('loading-msg').textContent = msgs[msgIdx];
+    }
+  }, 1200);
+
+  setTimeout(() => {
+    clearInterval(msgInterval);
+    calculateAndShow();
+  }, 6000);
+}
+
+function calculateAndShow() {
+  // Calculate scores per archetype
+  const scores = {};
+  Object.keys(ARCHETYPES).forEach(k => scores[k] = 0);
+
+  QUESTIONS.forEach(q => {
+    if (answers[q.id] !== undefined) {
+      scores[q.archetype] += answers[q.id];
+    }
+  });
+
+  // Rank archetypes
+  const ranked = Object.entries(scores)
+    .map(([key, score]) => ({ key, score, maxScore: 15 }))
+    .sort((a, b) => b.score - a.score);
+
+  const top3 = ranked.slice(0, 3);
+
+  // Render results
+  renderResults(top3, scores);
+
+  // Send to Google Sheets
+  sendToSheets(scores, top3);
+
+  showSection('results-section');
+}
+
+function renderResults(top3, allScores) {
+  document.getElementById('results-name').textContent = userData.name;
+
+  const cardsContainer = document.getElementById('results-cards');
+  cardsContainer.innerHTML = '';
+
+  const rankLabels = [
+    "✦ Arquétipo Primário — sua força dominante",
+    "✦ Arquétipo Secundário — sua aliada interior",
+    "✦ Arquétipo Terciário — sua sabedoria emergente"
+  ];
+
+  top3.forEach((item, idx) => {
+    const arch = ARCHETYPES[item.key];
+    const pct = Math.round((item.score / item.maxScore) * 100);
+
+    const card = document.createElement('div');
+    card.className = 'archetype-rank';
+    card.style.animationDelay = (idx * 0.2) + 's';
+
+    card.innerHTML = `
+      <div class="rank-label">${rankLabels[idx]}</div>
+      <div class="archetype-card">
+        <div class="card-header">
+          <div class="card-icon">${arch.icon}</div>
+          <div class="card-title-group">
+            <h3 class="card-title">${arch.name}</h3>
+            <p class="card-essence">${arch.essence}</p>
+          </div>
+        </div>
+        <div class="card-score-bar">
+          <div class="card-score-fill" style="width: 0%" data-target="${pct}"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-section">
+            <div class="card-section-title"><span class="dot dot-light"></span> Sua Luz — O Potencial</div>
+            <p class="card-section-text">${arch.light}</p>
+          </div>
+          <div class="card-section">
+            <div class="card-section-title"><span class="dot dot-shadow"></span> Sua Sombra — O Convite à Integração</div>
+            <p class="card-section-text">${arch.shadow}</p>
+          </div>
+          <div class="card-section">
+            <div class="card-section-title"><span class="dot dot-spirit"></span> O Despertar Espiritual</div>
+            <p class="card-section-text">${arch.spiritual}</p>
+          </div>
+        </div>
+      </div>`;
+
+    cardsContainer.appendChild(card);
+  });
+
+  // Animate score bars
+  setTimeout(() => {
+    document.querySelectorAll('.card-score-fill').forEach(bar => {
+      bar.style.width = bar.dataset.target + '%';
+    });
+  }, 500);
+
+  // Integration note
+  const note = document.getElementById('integration-note');
+  const a1 = ARCHETYPES[top3[0].key].name;
+  const a2 = ARCHETYPES[top3[1].key].name;
+  const a3 = ARCHETYPES[top3[2].key].name;
+
+  note.innerHTML = `
+    <h3 class="integration-title">A Dança dos Seus Arquétipos</h3>
+    <p class="integration-text">
+      Neste momento, ${a1} lidera sua jornada — é a energia que mais pulsa em você.
+      ${a2} caminha ao seu lado como aliada, trazendo equilíbrio e complementaridade.
+      E ${a3} sussurra do fundo, representando um aspecto que está emergindo e pedindo espaço.
+      <br><br>
+      Esses três arquétipos não são rótulos — são espelhos. Eles mostram onde você brilha,
+      onde pode se perder, e qual é o caminho de integração que sua alma está percorrendo.
+      O convite é olhar para cada um com honestidade e compaixão.
+    </p>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ██  GOOGLE SHEETS WEBHOOK
+// ═══════════════════════════════════════════════════════════════
+
+function getWebhookUrl() {
+  return localStorage.getItem('arquetipos_webhook') || '';
+}
+
+function saveWebhook() {
+  const url = document.getElementById('webhook-url').value.trim();
+  if (url) {
+    localStorage.setItem('arquetipos_webhook', url);
+    document.getElementById('webhook-status').classList.add('connected');
+    alert('Webhook salvo com sucesso!');
+  }
+}
+
+function initWebhookUI() {
+  const saved = getWebhookUrl();
+  if (saved) {
+    document.getElementById('webhook-url').value = saved;
+    document.getElementById('webhook-status').classList.add('connected');
+  }
+}
+
+function sendToSheets(scores, top3) {
+  const webhookUrl = getWebhookUrl();
+  if (!webhookUrl) {
+    console.log('Webhook não configurado — dados não enviados.');
+    return;
+  }
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    nome: userData.name,
+    whatsapp: userData.whatsapp,
+    idade: userData.age,
+    origem: userData.source,
+    arquetipo_1: ARCHETYPES[top3[0].key].name + ` (${top3[0].score}/15)`,
+    arquetipo_2: ARCHETYPES[top3[1].key].name + ` (${top3[1].score}/15)`,
+    arquetipo_3: ARCHETYPES[top3[2].key].name + ` (${top3[2].score}/15)`,
+    scores_completos: JSON.stringify(scores),
+    respostas_raw: JSON.stringify(answers)
+  };
+
+  fetch(webhookUrl, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    console.log('Dados enviados para Google Sheets.');
+  }).catch(err => {
+    console.error('Erro ao enviar dados:', err);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ██  SHARE
+// ═══════════════════════════════════════════════════════════════
+
+function shareWhatsApp() {
+  const text = encodeURIComponent(
+    `✨ Acabei de descobrir meu Mapa Arquetípico!\n\nDescubra quais forças ancestrais guiam sua jornada:\n${window.location.href}`
+  );
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ██  WHATSAPP MASK
+// ═══════════════════════════════════════════════════════════════
+
+function initWhatsAppMask() {
+  const input = document.getElementById('inp-whatsapp');
+  input.addEventListener('input', function(e) {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.length > 11) v = v.slice(0, 11);
+    if (v.length > 7) {
+      v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+    } else if (v.length > 2) {
+      v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+    } else if (v.length > 0) {
+      v = `(${v}`;
+    }
+    e.target.value = v;
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ██  INIT
+// ═══════════════════════════════════════════════════════════════
+
+document.addEventListener('DOMContentLoaded', () => {
+  initStars();
+  initWebhookUI();
+  initWhatsAppMask();
+});
+</script>
+
+</body>
+</html>
