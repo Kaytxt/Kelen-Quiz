@@ -1437,36 +1437,13 @@ function renderResults(top3, allScores) {
 // ██  GOOGLE SHEETS WEBHOOK
 // ═══════════════════════════════════════════════════════════════
 
-function getWebhookUrl() {
-  return localStorage.getItem('arquetipos_webhook') || '';
-}
-
-function saveWebhook() {
-  const url = document.getElementById('webhook-url').value.trim();
-  if (url) {
-    localStorage.setItem('arquetipos_webhook', url);
-    document.getElementById('webhook-status').classList.add('connected');
-    alert('Webhook salvo com sucesso!');
-  }
-}
-
-function initWebhookUI() {
-  const saved = getWebhookUrl();
-  if (saved) {
-    document.getElementById('webhook-url').value = saved;
-    document.getElementById('webhook-status').classList.add('connected');
-  }
-}
-
+// Substitua as funções de Webhook por esta versão simplificada:
 function sendToSheets(scores, top3) {
-  const webhookUrl = getWebhookUrl();
-  if (!webhookUrl) {
-    console.log('Webhook não configurado — dados não enviados.');
-    return;
-  }
+  // Coloque sua URL do Google Script aqui diretamente
+  const webhookUrl = 'https://script.google.com/macros/s/AKfycbz3_A6JdCBOJd9oXZAzI9m5fTqUdnmWIjyOJ6CTDuQ5rY2rb-Yx28_ZVQNquPEz6keC/exec';
 
   const payload = {
-    timestamp: new Date().toISOString(),
+    timestamp: new Date().toLocaleString("pt-BR"),
     nome: userData.name,
     whatsapp: userData.whatsapp,
     idade: userData.age,
@@ -1478,16 +1455,16 @@ function sendToSheets(scores, top3) {
     respostas_raw: JSON.stringify(answers)
   };
 
+  // Usando uma técnica mais compatível com Google Apps Script (FormData ou JSON via POST)
   fetch(webhookUrl, {
     method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(() => {
-    console.log('Dados enviados para Google Sheets.');
-  }).catch(err => {
-    console.error('Erro ao enviar dados:', err);
-  });
+    body: JSON.stringify(payload),
+    headers: {
+      'Content-Type': 'text/plain;charset=utf-8', // Importante para evitar erros de CORS no Apps Script
+    },
+  })
+  .then(res => console.log('Dados enviados com sucesso!'))
+  .catch(err => console.error('Erro ao enviar para a planilha:', err));
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1527,7 +1504,6 @@ function initWhatsAppMask() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initStars();
-  initWebhookUI();
   initWhatsAppMask();
 
   // Initial Entry Animation
